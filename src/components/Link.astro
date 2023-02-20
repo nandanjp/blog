@@ -1,0 +1,63 @@
+---
+import { Icon } from "astro-icon";
+
+interface Props {
+  text: string;
+  href: string;
+  style: "primary" | "secondary";
+  icon?: {
+    name: string;
+    side: "left" | "right";
+  };
+  isFilled?: boolean;
+  borderVisible?: boolean;
+  classes?: string;
+}
+
+const {
+  text,
+  href,
+  style,
+  icon,
+  isFilled = true,
+  borderVisible = false,
+  classes,
+  ...rest
+} = Astro.props as Props;
+---
+
+<a
+  href={href}
+  class:list={[
+    "nav-link link block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent",
+    classes,
+    style,
+    { filled: isFilled, bordered: borderVisible },
+  ]}
+  {...rest}
+>
+  {
+    icon && icon.side === "left" && (
+      <Icon name={icon.name} height="24" width="24" />
+    )
+  }
+  <span>{text}</span>
+  {
+    icon && icon.side === "right" && (
+      <Icon name={icon.name} height="24" width="24" />
+    )
+  }
+</a>
+
+<style lang="scss">
+  .nav-link {
+    transition: all 0.2s ease-in;
+    padding: 0.5rem 1rem;
+  }
+  .nav-link:hover {
+    color: aquamarine;
+    background-color: dodgerblue;
+    box-shadow: 20px;
+    transform: translateY(-3px);
+  }
+</style>

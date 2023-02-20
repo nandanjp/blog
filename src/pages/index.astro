@@ -1,15 +1,32 @@
 ---
+const isVisible: boolean = true;
+const array: number[] = [1, 2, 3, 4, 5, 6];
+
+//import layouts
+import MainLayout from "./../layouts/MainLayout.astro";
+import Wrapper from "./../layouts/Wrapper.astro";
+import Grid from "./../layouts/Grid.astro";
+//import components
+import Card from "./../components/Card.astro";
 ---
 
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
+  <MainLayout title="Home">
+    <Wrapper>
+      <Grid>
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+      </Grid>
+    </Wrapper>
+  </MainLayout>
 </html>

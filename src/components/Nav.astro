@@ -1,0 +1,85 @@
+---
+//library imports
+import { Icon } from "astro-icon";
+//component imports
+import Link from "./Link.astro";
+//data imports
+import { navData } from "../data/navData";
+---
+
+<nav
+  class="nav bg-white border-gray-200 px-2 sm:px-4 py-2.5"
+  aria-label="Primary"
+>
+  <div class="container flex flex-wrap items-center justify-between mx-auto">
+    <a href="/" aria-label="Go home" class="flex items-center">
+      <Icon name="logo" width="40" />
+      <span
+        class="self-center text-xl font-semibold whitespace-nowrap dark:text-white"
+        >Nandan</span
+      >
+    </a>
+    <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+      <ul
+        class="nav-list flex flex-col p-4 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700"
+      >
+        {
+          navData.map((item) => (
+            <li>
+              <Link
+                text={item.name}
+                href={item.path}
+                style="secondary"
+                isFilled={false}
+                data-navLink
+              />
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<style>
+  .nav {
+    background-image: linear-gradient(to right, #434343 0%, black 100%);
+    transition: all 0.3s ease;
+  }
+  .nav-list {
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+  }
+  .sticky {
+    position: sticky;
+    margin: 10px;
+    top: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    z-index: 10;
+  }
+</style>
+
+<script>
+  import "../js/nav";
+
+  const nav = document.querySelector(".nav");
+  if (nav !== null) {
+    const top = nav.offsetTop;
+    window.addEventListener("scroll", () => {
+      if (
+        window.scrollY >= top + nav.clientHeight + 100 &&
+        !nav.classList.contains("sticky")
+      ) {
+        nav.classList.add("sticky");
+      } else if (window.scrollY <= top && nav.classList.contains("sticky")) {
+        nav.classList.remove("sticky");
+      }
+    });
+  }
+</script>

@@ -1,0 +1,59 @@
+---
+//component imports
+import Link from "./Link.astro";
+//data imports
+import { footerData } from "./../data/footerData";
+---
+
+<footer
+  class="footer p-4 bg-white shadow md:px-6 md:py-8 bg-opacity-80"
+  style="backdrop-filter: blur(20px);"
+>
+  <div class="sm:flex sm:items-center sm:justify-between">
+    <a
+      href="https://github.nandanjp.io/"
+      class="flex items-center mb-4 sm:mb-0"
+    >
+      <span
+        class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white"
+        >Nandan's Thoughts</span
+      >
+    </a>
+    <ul
+      class="flex flex-col p-4 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0"
+    >
+      {
+        footerData.map((item: { name: string; path: string }) => (
+          <Link
+            text={item.name}
+            href={item.path}
+            style="secondary"
+            isFilled={false}
+            data-navLink
+          />
+        ))
+      }
+    </ul>
+  </div>
+  <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
+  <span class="block text-sm text-gray-500 sm:text-center dark:text-gray-400"
+    ><a href="https://github.nandanjp.io/" class="hover:underline"
+      ><span id="copyright">&copy</span>Nandan's Thoughts™</a
+    ><span class="block text-sm text-gray-500 sm:text-center dark:text-gray-400"
+      >All Rights Reserved.</span
+    >
+  </span>
+</footer>
+
+<style>
+  .footer {
+    background-image: linear-gradient(to right, #434343 0%, black 100%);
+  }
+</style>
+
+<script>
+  const copyright = document.querySelector("#copyright");
+  if (copyright !== null) {
+    copyright.textContent += new Date().getFullYear().toString() + " ";
+  }
+</script>
